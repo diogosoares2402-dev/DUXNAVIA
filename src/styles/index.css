@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+  --dux-black: #050505;
+  --dux-yellow: #FFD400;
+  --dux-white: #FFFFFF;
+}
+
+/* Global glassmorphism and glow utilities */
+.glass {
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(6px) saturate(120%);
+  -webkit-backdrop-filter: blur(6px) saturate(120%);
+  border: 1px solid rgba(255,255,255,0.04);
+}
+
+.glow {
+  box-shadow: 0 0 24px rgba(255,212,0,0.18);
+}
+
+/* Subtle golden particles */
+.particle {
+  background: radial-gradient(circle, rgba(255,212,0,0.95) 0%, rgba(255,212,0,0.35) 40%, rgba(255,212,0,0.0) 60%);
+}
