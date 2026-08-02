@@ -8,6 +8,8 @@
   --dux-white: #FFFFFF;
 }
 
+/* rest of CSS unchanged below... */
+
 /* Global glassmorphism and glow utilities */
 .glass {
   background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
