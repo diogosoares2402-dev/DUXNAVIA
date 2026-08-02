@@ -1,0 +1,10 @@
+@media (prefers-reduced-motion: reduce){
+  .slot-machine, .reel, .particle, .coin, .chip{ animation: none !important; transition: none !important }
+}
+
+/* Further mobile tuning: lower shadow and particle counts */
+@media (max-width: 640px){
+  .slot-machine{ box-shadow: 0 6px 24px rgba(255,212,0,0.06) }
+  .flash-intense{ box-shadow: 0 0 60px rgba(255,212,0,0.6) inset }
+  .neon-intro{ text-shadow: 0 0 18px rgba(255,212,0,0.6) }
+}
