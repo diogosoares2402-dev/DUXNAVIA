@@ -77,7 +77,8 @@ const SYMBOLS = ['diamond','cherry','star','seven','money']
 const FINAL = ['D','U','X']
 
 export default function Splash(){
-  const [show, setShow] = useState(() => { try{ return !sessionStorage.getItem('dux_splash_shown') }catch(e){ return true } })
+  // Avoid accessing sessionStorage/window during build/SSR: determine visibility on mount
+  const [show, setShow] = useState(false)
   const [reels, setReels] = useState([SYMBOLS[0], SYMBOLS[1], SYMBOLS[2]])
   const [stopped, setStopped] = useState([false,false,false])
   const [showJackpot, setShowJackpot] = useState(false)
@@ -89,12 +90,28 @@ export default function Splash(){
   const intervals = useRef([])
   const audioInstances = useRef({ spin:null, stop: null, jackpot: null })
 
+  // run only on client to decide whether to show splash
   useEffect(()=>{
-    setIsMobile(typeof window !== 'undefined' && window.innerWidth <= 640)
     try{
-      const media = window.matchMedia('(prefers-reduced-motion: reduce)')
-      setPrefersReducedMotion(media.matches)
-    }catch(e){ setPrefersReducedMotion(false) }
+      setIsMobile(typeof window !== 'undefined' && window.innerWidth <= 640)
+      const media = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)')
+      setPrefersReducedMotion(media ? media.matches : false)
+    }catch(e){
+      setIsMobile(false)
+      setPrefersReducedMotion(false)
+    }
+
+    try{
+      const shown = sessionStorage.getItem('dux_splash_shown')
+      if(shown){
+        setShow(false)
+      }else{
+        setShow(true)
+      }
+    }catch(e){
+      // default to showing on client if storage unavailable
+      setShow(true)
+    }
   },[])
 
   useEffect(()=>{
@@ -157,7 +174,17 @@ export default function Splash(){
   }
 
   function triggerVibration(i){
-    try{ const el = document.querySelectorAll('.reel')[i]; if(el){ el.animate([{ transform: 'translateY(0)' }, { transform:'translateY(-6px) rotate(-1deg)' }, { transform:'translateY(3px) rotate(1deg)' }, { transform:'translateY(0)' }], { duration: 320 }) } }catch(e){}
+    try{
+      const el = document.querySelectorAll('.reel')[i]
+      if(el && el.animate){
+        el.animate([
+          { transform: 'translateY(0)' },
+          { transform:'translateY(-6px) rotate(-1deg)' },
+          { transform:'translateY(3px) rotate(1deg)' },
+          { transform:'translateY(0)' }
+        ], { duration: 320 })
+      }
+    }catch(e){}
     try{ if(audioInstances.current.stop){ audioInstances.current.stop.currentTime = 0; audioInstances.current.stop.play().catch(()=>{}) } }catch(e){}
   }
 
@@ -166,7 +193,7 @@ export default function Splash(){
     setFlash(true)
     try{ if(audioInstances.current.jackpot){ audioInstances.current.jackpot.currentTime = 0; audioInstances.current.jackpot.play().catch(()=>{}) } }catch(e){}
     // small global vib, subtle on mobile
-    try{ document.body.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(-6px)' }, { transform: 'translateY(3px)' }, { transform: 'translateY(0)' }], { duration: isMobile?300:420 }) }catch(e){}
+    try{ if(document.body && document.body.animate){ document.body.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(-6px)' }, { transform: 'translateY(3px)' }, { transform: 'translateY(0)' }], { duration: isMobile?300:420 }) }catch(e){}
 
     setTimeout(()=>{
       setShowJackpot(false)
