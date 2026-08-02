@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Nav from './components/Nav'
 import Hero from './components/Hero'
 import AnimatedBackground from './components/AnimatedBackground'
 import Section from './components/Section'
 import Footer from './components/Footer'
+import Splash from './components/Splash'
 
 import SocialCard from './components/SocialCard'
 import PartnershipCard from './components/PartnershipCard'
@@ -12,9 +13,15 @@ import ScheduleCard from './components/ScheduleCard'
 import CommunityForm from './components/CommunityForm'
 
 export default function App(){
+  useEffect(()=>{
+    // ensure body background color is set early for splash visual
+    document.body.style.backgroundColor = 'var(--dux-black)'
+  },[])
+
   return (
     <div className="min-h-screen relative overflow-hidden text-white bg-dux-black">
       <AnimatedBackground />
+      <Splash />
       <Nav />
       <main className="relative z-30 pb-24">
         <Hero />
