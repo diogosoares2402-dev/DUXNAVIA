@@ -10,17 +10,33 @@
 
 /* Global glassmorphism and glow utilities */
 .glass {
-  background: rgba(255,255,255,0.03);
-  backdrop-filter: blur(6px) saturate(120%);
-  -webkit-backdrop-filter: blur(6px) saturate(120%);
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  backdrop-filter: blur(8px) saturate(120%);
+  -webkit-backdrop-filter: blur(8px) saturate(120%);
   border: 1px solid rgba(255,255,255,0.04);
 }
 
 .glow {
-  box-shadow: 0 0 24px rgba(255,212,0,0.18);
+  box-shadow: 0 0 36px rgba(255,212,0,0.18), 0 8px 48px rgba(5,5,5,0.55);
 }
 
-/* Subtle golden particles */
+.neon-title{
+  color: var(--dux-white);
+  text-shadow: 0 0 18px rgba(255,212,0,0.12), 0 2px 10px rgba(0,0,0,0.6);
+}
+
+/* button subtle hover glow */
+.button-glow:hover{ box-shadow: 0 0 24px rgba(255,212,0,0.28); transform: translateY(-2px); }
+
+/* particle style */
 .particle {
   background: radial-gradient(circle, rgba(255,212,0,0.95) 0%, rgba(255,212,0,0.35) 40%, rgba(255,212,0,0.0) 60%);
+}
+
+/* forms */
+input:focus, textarea:focus{ outline: none; box-shadow: 0 0 20px rgba(255,212,0,0.06); }
+
+/* responsive text adjustments */
+@media (max-width: 640px){
+  .neon-title{ font-size: 3.2rem; }
 }

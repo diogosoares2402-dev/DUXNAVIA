@@ -4,32 +4,34 @@ import Button from './Button'
 
 export default function Hero(){
   const container = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { staggerChildren: 0.12, ease: 'easeOut' } }
+    hidden: { opacity: 0, y: 30 },
+    show: { opacity: 1, y: 0, transition: { staggerChildren: 0.09, ease: 'easeOut' } }
   }
-  const item = { hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0 } }
+  const item = { hidden: { opacity: 0, y: 18 }, show: { opacity: 1, y: 0, transition: { duration: 0.6 } } }
 
   return (
-    <header className="min-h-[78vh] flex items-center justify-center px-6">
-      <motion.div variants={container} initial="hidden" animate="show" className="text-center max-w-4xl w-full z-20">
-        <motion.p variants={item} className="mb-4 text-sm md:text-base tracking-wide text-gray-300">BEM-VINDO AO MELHOR SITE DA TUGA</motion.p>
-        <motion.h1 variants={item} className="text-5xl md:text-8xl font-black leading-tight neon-title">DUXNAVIA</motion.h1>
-        <motion.p variants={item} className="mt-6 text-lg md:text-2xl text-gray-200">Streamer de Casino • Slots • Promoções • Lives</motion.p>
+    <header className="min-h-[88vh] flex items-center justify-center px-6 relative">
+      <motion.div variants={container} initial="hidden" animate="show" className="text-center max-w-5xl w-full z-20">
+        <motion.p variants={item} className="mb-4 text-sm md:text-base tracking-widest text-gray-300 uppercase">BEM-VINDO AO MELHOR SITE DA TUGA</motion.p>
+        <motion.h1 variants={item} className="text-6xl md:text-[7.5rem] font-extrabold leading-tight neon-title drop-shadow-2xl">DUXNAVIA</motion.h1>
+        <motion.p variants={item} className="mt-6 text-lg md:text-2xl text-gray-200">Streamer de Casino • Slots • Bónus • Comunidade</motion.p>
 
-        <motion.div variants={item} className="mt-8 flex items-center justify-center gap-6">
+        <motion.div variants={item} className="mt-10 flex items-center justify-center gap-6">
           <Button variant="primary" onClick={() => {
             const el = document.getElementById('redes')
             if(el) el.scrollIntoView({behavior:'smooth', block:'start'})
           }}>
-            ENTRAR
+            COMEÇAR
           </Button>
 
-          <div className="hidden md:flex gap-4">
-            <Button variant="outline">Ver Redes</Button>
-            <Button variant="ghost">Ver Parcerias</Button>
-          </div>
+          <a href="#parcerias" className="hidden md:inline-flex items-center px-5 py-3 rounded-full border border-white/6 text-sm text-gray-200 hover:text-dux-yellow transition">Ver Parcerias</a>
         </motion.div>
       </motion.div>
+
+      {/* subtle vignette glow edges */}
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/30 to-black/60" />
+      </div>
     </header>
   )
 }

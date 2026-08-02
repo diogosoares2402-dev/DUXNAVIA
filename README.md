@@ -1,18 +1,16 @@
 # DUXNAVIA
 
-Este repositório contém uma versão inicial do website DUXNAVIA criada com:
+Versão atual: landing page premium (demo).
 
-- React + Vite
-- Tailwind CSS
-- Framer Motion
+Alterações:
+- Hero impactante atualizado
+- Fundo reforçado com símbolos animados
+- Secções: Redes, Parcerias, Promoções, Lives, Comunidade (com formulário local)
+- Componentes novos: SocialCard, PartnershipCard, PromotionCard, ScheduleCard, CommunityForm
+- Melhorias de animações com Framer Motion
 
-Objetivos: site mobile-first, estilo premium de casino, animações suaves, componentes reutilizáveis.
+Como testar localmente:
+1. npm install
+2. npm run dev
 
-Como usar (local):
-
-1. Instalar dependências: npm install
-2. Rodar em desenvolvimento: npm run dev
-
-Observações:
-- Este é um scaffold inicial com conteúdo de exemplo. Links e promoções reais serão adicionados depois.
-
+Observações: todos os links e dados são fictícios/placeholder. Não foram adicionados casinos reais nem links pessoais.

@@ -9,8 +9,9 @@ export default function Footer(){
           <div className="text-sm text-gray-300 mt-2">+18 · Jogo Responsável</div>
         </div>
 
-        <div className="flex-1">
+        <div className="flex-1 text-center md:text-left">
           <div className="text-sm text-gray-400">Copyright © {new Date().getFullYear()} DUXNAVIA</div>
+          <div className="text-sm text-gray-400 mt-2">Redes: IG · TW · YT · DC (placeholders)</div>
         </div>
 
         <div className="flex gap-3">
